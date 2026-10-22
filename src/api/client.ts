@@ -32,7 +32,7 @@ async function request<T>(path: string, options: { method?: string; body?: unkno
       body: options.body !== undefined ? JSON.stringify(options.body) : undefined,
     });
   } catch {
-    throw new ApiError(0, "Impossible de joindre le serveur. Vérifiez que le back end est lancé.");
+    throw new ApiError(0, `Impossible de joindre le serveur (${API_URL}). Vérifiez que le back end est lancé.`);
   }
 
   const data = await res.json().catch(() => null);

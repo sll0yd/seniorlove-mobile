@@ -2,6 +2,7 @@ import { router } from "expo-router";
 import { useState } from "react";
 import { Image, KeyboardAvoidingView, ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { ApiError } from "@/api/client";
 import { useAuth } from "@/auth/AuthContext";
 import { Button, Field, styles } from "@/components/ui";
 import { colors } from "@/theme";
@@ -19,8 +20,9 @@ export default function LoginScreen() {
     setError(null);
     try {
       await signIn(email, password);
-    } catch {
-      setError("Email ou mot de passe incorrect.");
+    } catch (e) {
+      // Network problem: show the real reason. Otherwise it's a wrong email/password.
+      setError(e instanceof ApiError && e.status === 0 ? e.message : "Email ou mot de passe incorrect.");
     } finally {
       setLoading(false);
     }
