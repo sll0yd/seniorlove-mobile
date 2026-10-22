@@ -1,6 +1,7 @@
 # Senior Love — iOS app 💘
 
-The mobile version of Senior Love, built with **Expo (SDK 58) + React Native + TypeScript + Expo Router**.
+The mobile version of Senior Love, built with **Expo (SDK 54) + React Native + TypeScript + Expo Router**.
+SDK 54 is the version supported by the Expo Go app on the App Store, so you can test on your own iPhone by scanning a QR code.
 It talks to the existing `seniorlove-back` API, the same way `seniorlove-front` does.
 
 ## What's inside
@@ -81,7 +82,7 @@ The seeded members have placeholder passwords, so **create an account** from the
 
 ## Testing on a real iPhone (optional)
 
-1. Install **Expo Go** from the App Store.
+1. Install **Expo Go** from the App Store (it supports Expo SDK 54, which this project uses).
 2. Phone and Mac on the same Wi-Fi.
 3. Create `seniorlove-mobile/.env` with your Mac's local IP (System Settings → Wi-Fi → Details):
    ```
