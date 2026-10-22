@@ -1,4 +1,5 @@
 import type { TextStyle } from "react-native";
+import { cubicBezier } from "react-native-reanimated";
 
 // ─── Colours ──────────────────────────────────────────────────────────────
 // Senior Love's rose palette, tuned so every text/background pair passes
@@ -67,5 +68,6 @@ export const type = {
 export const motion = {
   press: 120, // ms, press feedback
   state: 180, // ms, toggles / chips / small state changes
-  easeOut: "cubic-bezier(0.23, 1, 0.32, 1)",
+  // Native Reanimated needs the curve as cubicBezier(), not a CSS string.
+  easeOut: cubicBezier(0.23, 1, 0.32, 1),
 };
