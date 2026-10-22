@@ -1,31 +1,30 @@
-import Ionicons from "@expo/vector-icons/Ionicons";
 import { Tabs } from "expo-router";
-import type { ComponentProps } from "react";
+import { Icon, type IconName } from "@/components/Icon";
+import { TAB_TITLES } from "@/navigation";
 import { colors } from "@/theme";
 
-type IconName = ComponentProps<typeof Ionicons>["name"];
-
-// Tab bar icon: the navigator hands us the tint color for the active/inactive state.
-const icon =
+// Tab bar icon in the colour the tab bar hands us (active / inactive).
+const tabIcon =
   (name: IconName) =>
-  ({ color, size }: { color: unknown; size: number }) => <Ionicons name={name} color={color as string} size={size + 2} />;
+  ({ color }: { color: unknown }) => <Icon name={name} size={24} color={color as string} />;
 
 export default function TabsLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: colors.primaryDark,
-        tabBarInactiveTintColor: colors.muted,
+        headerShown: false, // each tab has its own stack with a large title
+        animation: "none", // tabs are peers: switching never slides
+        tabBarActiveTintColor: colors.primaryText,
+        tabBarInactiveTintColor: colors.secondaryText,
         tabBarLabelStyle: { fontSize: 13, fontWeight: "600" },
-        headerStyle: { backgroundColor: colors.background },
-        headerTitleStyle: { fontSize: 22, fontWeight: "800", color: colors.text },
+        tabBarStyle: { backgroundColor: colors.surface, borderTopColor: colors.separator },
         sceneStyle: { backgroundColor: colors.background },
       }}
     >
-      <Tabs.Screen name="index" options={{ title: "Événements", tabBarIcon: icon("calendar") }} />
-      <Tabs.Screen name="members" options={{ title: "Membres", tabBarIcon: icon("people") }} />
-      <Tabs.Screen name="messages" options={{ title: "Messages", tabBarIcon: icon("chatbubbles") }} />
-      <Tabs.Screen name="profile" options={{ title: "Mon profil", tabBarIcon: icon("person-circle") }} />
+      <Tabs.Screen name="(events)" options={{ title: TAB_TITLES["(events)"], tabBarIcon: tabIcon("calendar") }} />
+      <Tabs.Screen name="(members)" options={{ title: TAB_TITLES["(members)"], tabBarIcon: tabIcon("people") }} />
+      <Tabs.Screen name="(messages)" options={{ title: TAB_TITLES["(messages)"], tabBarIcon: tabIcon("chat") }} />
+      <Tabs.Screen name="(profile)" options={{ title: TAB_TITLES["(profile)"], tabBarIcon: tabIcon("person") }} />
     </Tabs>
   );
 }

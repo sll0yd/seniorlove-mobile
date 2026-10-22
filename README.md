@@ -28,7 +28,9 @@ src/
     _layout.tsx         ← root: logged-in vs logged-out screens
     (auth)/login.tsx, register.tsx
     (tabs)/_layout.tsx  ← the bottom tab bar
-    (tabs)/index.tsx, members.tsx, messages.tsx, profile.tsx
+    (tabs)/(events)/index.tsx, (members)/members.tsx, (messages)/messages.tsx, (profile)/profile.tsx
+                        ← one stack per tab, with a large title
+    edit-profile.tsx    ← modal to edit your profile
     events/[id].tsx, events/new.tsx
     members/[id].tsx
     chat/[id].tsx
@@ -39,6 +41,17 @@ src/
   config.ts             ← back-end URL
   theme.ts              ← colours & font sizes (large, for seniors)
 ```
+
+## Design system
+
+All screens are built from the same few pieces, so spacing, type and buttons stay consistent:
+
+- `src/theme.ts`: colours (every text/background pair passes WCAG AA 4.5:1), the 4pt spacing scale, the type scale (sized for a 60+ audience, scales with iOS Dynamic Type), and the motion timings.
+- `src/components/ui.tsx`: `T` (text), `Button` (`filled` / `tinted` / `plain` / `destructive`; one `filled` per screen), `PressableScale` (instant press feedback), `Card`, `BottomBar` (fixed main action), `TagChip`, `ListSection` / `ListRow`, and the loading / error / empty states.
+- `src/components/Field.tsx`: labelled input with its error underneath and a show/hide password button.
+- `src/components/Icon.tsx`: SF Symbols on iOS, matching Ionicons elsewhere.
+- `src/navigation.ts`: iOS large titles, translucent bars, back buttons that name the previous screen.
+- `src/haptics.ts`: one haptic per meaningful action (join, send, toggle, error).
 
 ## Run it in the iOS Simulator (on your Mac)
 
